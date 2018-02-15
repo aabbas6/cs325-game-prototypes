@@ -38,7 +38,7 @@ window.onload = function()
 	var chickens;
 	var background;
 	var timer;
-	var sound;
+	//var sound;
 
 	function create() 
 	{
@@ -62,9 +62,9 @@ window.onload = function()
 		timer.start();
 
 		game.physics.p2.updateBoundsCollisionGroup();
-		sound = game.add.audio('squawk');
+	//	sound = game.add.audio('squawk');
 
-		game.sound.setDecodedCallback(sound, start, this);
+	//	game.sound.setDecodedCallback(sound, start, this);
 		
 		chickens = game.add.group();
 		chickens.enableBody = true;
