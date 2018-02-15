@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Kindergarten Geologist!</title>
+    <title>Cannibal Chicken</title>
     <script src="js/phaser.js"></script>
     <script src="js/main.js"></script>
 
@@ -22,52 +22,50 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Kindergarten Geologist</h2>
+<h2>Cannibal Chicken</h2>
 
 <ul>
 <li><strong>Originality:</strong>
     <ul>
-    <li> Assets that were created from another program (Asperite + RPGMaker Character Generator)
-    <li> Gameplay is unique, atleast to my own knowledge.
+    <li> Implementation of Chicken Theme to Survival of the Fittest Game
     </ul>
 </li>
 
 <li><strong>Technical Merit:</strong>
-
+	<ul>
+	<li> Player Grows as you consume other animals.
+	</ul>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
-Spritesheet, animation, movement, javascript
-What was the easiest or hardest part of making it?
-Easiest is learning how to do the spritesheet
-Hardest is figuring out how everything works
+Understanding collision function and how they can't access or change a sprite's size within the function without using tween.
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
-<li> Character was made in RPGMaker
+<li>  <a href="https://i.imgur.com/jODGJn4.png">Chicken SpriteSheet</a></li>
 </ul>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
 <ul>
-    <li>Phaser Examples: Timer, Animation, Physics2D Collision
+    <li>Fish Eating Fish
 </ul>
 </li>
 
 <li><strong>High Concept:</strong>
     <ul>
-    <li>A kindergarten geologist wants to bring rocks to its school to study it, but has a curfew to get to school.
+    <li> A game about survival of the fittest.
     </ul>
 </li>
 
 <li><strong>Theme:</strong>
 State which of the Storymatic themes you used.
     <ul>
-    <li>Geologist
+    <li>Chicken
     </ul>
 </li>
 
@@ -81,7 +79,7 @@ State which input, randomness, genre, and play style you used in this prototype.
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
 <ul>
-    <li> Trying to play with physics and animations.
+    <li> Trying to further understand groups, states, and using functions.
     </ul>
 </li>
 
@@ -95,32 +93,34 @@ What experience do you want players to have when playing your game?
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
 <ul>
-    <li> The player can move up, down, left, and right. The player can push the rocks towards the school. The rocks have 2D physics which bounces of other things.
-        Once the rock reaches the school, it disappears and add a counter to increase the score. After 30 seconds, the game ends registering how many rocks were brought to school before the curfew.
-    </ul>
+    <li> The player can move up, down, left, and right. The player can move towards other chickens. Once the player goes next to a chicken, it consumes it and grows exponentially.
+</ul>
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
     <ul>
-        <li> Use physic collision to push multiple rocks towards the school.
+        <li> None. Just Eat all the other Chicken as a Chicken.
     </ul>
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<ul>
+	<li> Due to the increase of Vegitarians, plants are scarce resources now and Chickens have turned into omnivores to survive.
+</ul>
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
     <ul>
-        <li> I was never thinking about the audience when I was making this, I was thinking about how I could make this fun for me"
+        <li> I was never thinking about the audience when I was making this, I was thinking about how does this work?"
     </ul>
 </li>
 
 <li><strong>Play Time:</strong>
-How long does your game take to play? Uh, it's not really that finished so 10 seconds?
+How long does your game take to play? 10 seconds.
 </li>
 
 </ul>

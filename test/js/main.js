@@ -60,6 +60,7 @@ window.onload = function() {
 		player.animations.add('right',[24,25,26], 10, true);
 		player.animations.add('up',[36,37,38],10, true);
 		
+		
 		game.physics.p2.enable(player, false);
 		player.body.fixedRotation = true;
 		player.body.setRectangle(48,48);
@@ -72,7 +73,7 @@ window.onload = function() {
 		
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
-        var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
+        var style = { font: "25px Verdana", fill: "#2000ee", align: "center" };
         var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
         text.anchor.setTo( 0.5, 0.0 );
     }
