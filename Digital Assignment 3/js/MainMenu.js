@@ -21,10 +21,6 @@ GameStates.makeMainMenu = function( game, shared ) {
             //	Here all we're doing is playing some music and adding a picture and button
             //	Naturally I expect you to do something significantly better :)
     
-            music = game.add.audio('StealthMusic');
-            music.play();
-    
-    
             playButton = game.add.button(game.world.centerX-100,400, 'Button', startGame,2,1,0);    
         }
     };

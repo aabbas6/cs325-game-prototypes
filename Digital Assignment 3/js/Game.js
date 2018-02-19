@@ -16,22 +16,43 @@ GameStates.makeGame = function( game, shared ) {
     var P2Score = 0;
     var score1 = null;
     var score2 = null;
+    var winnerText = null;
+    var music = null;
+    //end game
+    function quitGame()
+    {
+        music.stop();
+        player1.destroy();
+        player2.destroy();
+        timer.stop();
+        timer1.stop();
+        P1Score = 0;
+        P2Score = 0;
+        background.destroy();
+        border.destroy();
+    }
     return {
     
         create: function () 
         {
             game.physics.startSystem(Phaser.Physics.ARCADE);
-
+            
+            music = game.add.audio('StealthMusic');
+            music.play();
             background = game.add.sprite(0,0,'WhiteBackground');
             border = game.add.sprite(0,0,'RedBorder');
             player1 = game.add.sprite(200,300,'BlackPlayer');
             player2 = game.add.sprite(600,300,'Tagger');
 
             //add timer for background change
-            timer= game.time.create(false);
+            timer = game.time.create(false);
 		    timer.loop(3000, this.backgroundChange, this);
             timer.start(); 
-            
+            //add timer for changing sides
+            timer1 = game.time.create(false);
+            timer1.loop(10000, this.changeSide, this);
+            timer1.start();
+
             //create keys for W,A,S,D movement
             cursor = game.input.keyboard.createCursorKeys();
             upC = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -44,7 +65,7 @@ GameStates.makeGame = function( game, shared ) {
             player1.body.setSize(48,48,0,0);
             player2.body.setSize(48,48,0,0);
             player1.body.onCollide = new Phaser.Signal();
-            player1.body.onCollide.add(this.changeSide, this);
+            player1.body.onCollide.add(this.Tagged, this);
 
             //display Score
             var style = { font: "40px Verdana", fill: "#4444ee", align: "center" };
@@ -119,7 +140,31 @@ GameStates.makeGame = function( game, shared ) {
             }
             game.physics.arcade.collide(player1,player2);
         },
-        changeSide: function(player1,player2)
+        changeSide: function()
+        {
+            if(P2IsIt == true)
+            {
+                player1.loadTexture('Tagger',0);
+                player2.loadTexture('WhitePlayer',0);
+                player1.x = 200;
+                player1.y = 300;
+                player2.x = 600;
+                player2.y = 300;
+                P2IsIt = false;
+            }
+            else
+            {
+                player1.loadTexture('BlackPlayer',0);
+                player2.loadTexture('Tagger',0);
+                player1.x = 200;
+                player1.y = 300;
+                player2.x = 600;
+                player2.y = 300;
+                P2IsIt = true;
+            }
+        },
+
+        Tagged: function(player1,player2)
         {
             if(P2IsIt == true)
             {
@@ -147,6 +192,27 @@ GameStates.makeGame = function( game, shared ) {
                 score2.setText(P2Score);
                 P2IsIt = true;
             }
+            if(P1Score == 5)
+            {
+                var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
+                winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P1 Wins', style);
+                quitGame();
+            }
+            else if(P2Score == 5)
+            {
+                var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
+                winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P2 Wins', style);
+                quitGame();
+            }
+            timer.stop();
+            timer = game.time.create(false);
+            timer.loop(2000, this.backgroundChange,this);
+            timer.start();
+            timer1.stop();
+            timer1 = game.time.create(false);
+            timer1.loop(10000, this.changeSide, this);
+            timer1.start();
+            
         },
         render: function()
         {
