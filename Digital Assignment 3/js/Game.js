@@ -53,6 +53,7 @@ GameStates.makeGame = function( game, shared ) {
             timer1.loop(10000, this.changeSide, this);
             timer1.start();
 
+
             //create keys for W,A,S,D movement
             cursor = game.input.keyboard.createCursorKeys();
             upC = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -212,11 +213,10 @@ GameStates.makeGame = function( game, shared ) {
             timer1 = game.time.create(false);
             timer1.loop(10000, this.changeSide, this);
             timer1.start();
-            
         },
         render: function()
         {
-            game.debug.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
+            game.debug.text('Changing Tagger At: ' + timer1.duration.toFixed(0), 32, 32);
         }
     };
 };
