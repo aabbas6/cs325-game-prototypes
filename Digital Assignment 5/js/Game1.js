@@ -42,26 +42,20 @@ GameStates.makeGame1 = function( game, shared ) {
         create: function () 
         {
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            
             music = game.add.audio('StealthMusic');
             music.play();
             background = game.add.sprite(0,0,'WhiteBackground');
            // border = game.add.sprite(0,0,'RedBorder');
 
-            map = game.add.tilemap('level1');
-            map.addTilesetImage('tagger','tagger');
-            layer = map.createLayer('Tile Layer 1');
+            map = game.add.tilemap('level1', 48, 48);
+            map.addTilesetImage('tagger');
+            layer = map.createLayer(0);
             layer.resizeWorld();
-            map.setCollision(1);
-    
-            game.physics.p2.convertTilemap(map,layer);
-            game.physics.p2.restitution = 0.5;
+            map.setCollisionBetween(0,0, true,0,);
+            layer.debug = true;
+
             player1 = game.add.sprite(200,300,'BlackPlayer');
             player2 = game.add.sprite(600,300,'tagger');
-
-           // game.arcade.collide(player1, layer);
-           // game.arcade.collide(player2, layer);
-
             //add timer for background change
             timer = game.time.create(false);
 		    timer.loop(3000, this.backgroundChange, this);
@@ -80,7 +74,7 @@ GameStates.makeGame1 = function( game, shared ) {
             leftC = game.input.keyboard.addKey(Phaser.Keyboard.A);
             
             //create physics movement for both players
-            game.physics.enable( [player1,player2]);
+            game.physics.enable( [player1,player2,map]);
             player1.body.setSize(48,48,0,0);
             player2.body.setSize(48,48,0,0);
             player1.body.onCollide = new Phaser.Signal();
@@ -236,5 +230,5 @@ GameStates.makeGame1 = function( game, shared ) {
         {
             game.debug.text('Changing Tagger At: ' + timer1.duration.toFixed(0), 32, 32);
         }
-    };
+    }
 };

@@ -20,7 +20,6 @@ GameStates.makePreloader = function( game ) {
             game.load.setPreloadSprite(preloadBar);
     
             //	Here we load the rest of the assets our game needs.
-            game.load.tilemap('map','assets/stealth1.csv', null, Phaser.Tilemap.CSV)
             game.load.spritesheet('Button', 'assets/PlayButton.png',200,100);
             game.load.spritesheet('Stage1','assets/stage1.png',96,96);
             game.load.spritesheet('Stage2','assets/stage2.png',96,96);
@@ -32,8 +31,9 @@ GameStates.makePreloader = function( game ) {
             game.load.image('WhiteBackground','assets/whitebackground.png');
             game.load.image('BlackBackground','assets/blakbackground.png');
             game.load.image('RedBorder','assets/redborder.png');
+            game.load.tilemap('level1','assets/stealth1.csv',null,Phaser.Tilemap.CSV);
             //game.load.tilemap('level2', 'assets/stealth2.json',null,Phaser.Tilemap.TILED_JSON);
-           // game.load.tilemap('level3', 'assets/stealth3.json',null,Phaser.Tilemap.TILED_JSON);
+            //game.load.tilemap('level3', 'assets/stealth3.json',null,Phaser.Tilemap.TILED_JSON);
         },
     
         create: function () 
