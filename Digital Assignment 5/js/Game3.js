@@ -10,7 +10,6 @@ GameStates.makeGame3 = function( game, shared ) {
     var background = null;
     var map = null;
     var layer = null;
-    var border = null;
     var backgroundWhite = true;
 
     var cursor = null;
@@ -25,7 +24,7 @@ GameStates.makeGame3 = function( game, shared ) {
     var map = null;
     var layer = null;
     //end game
-    function quitGame()
+    function quitGame1()
     {
         music.stop();
         player1.destroy();
@@ -35,30 +34,40 @@ GameStates.makeGame3 = function( game, shared ) {
         P1Score = 0;
         P2Score = 0;
         background.destroy();
-        border.destroy();
+        game.state.start('P1Victory');
+    }
+    function quitGame2()
+    {
+        music.stop();
+        player1.destroy();
+        player2.destroy();
+        timer.stop();
+        timer1.stop();
+        P1Score = 0;
+        P2Score = 0;
+        background.destroy();
+        game.state.start('P2Victory');
     }
     return {
     
         create: function () 
         {
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            
             music = game.add.audio('StealthMusic');
             music.play();
             background = game.add.sprite(0,0,'WhiteBackground');
-            //border = game.add.sprite(0,0,'RedBorder');
-            map = game.add.tile('level1');
-            level1.addTilesetImage('Tagger');
-            layer = map.createLayer('Tile Layer 1');
-            layer.resizeWorld();
-            map.setCollision(1);          
-            game.physics.p2.convertTilemap(map,layer);
-            game.physics.p2.restitution = 0.5;
+           // border = game.add.sprite(0,0,'RedBorder');
 
+            map = game.add.tilemap('level3', 48, 48);
+            map.addTilesetImage('tagger');
+            layer = map.createLayer(0);
+            layer.resizeWorld();
+            map.setCollisionBetween(0,0);
+            
+            //layer.debug = true;
 
             player1 = game.add.sprite(200,300,'BlackPlayer');
-            player2 = game.add.sprite(600,300,'Tagger');
-
+            player2 = game.add.sprite(600,300,'tagger');
             //add timer for background change
             timer = game.time.create(false);
 		    timer.loop(3000, this.backgroundChange, this);
@@ -105,6 +114,8 @@ GameStates.makeGame3 = function( game, shared ) {
     
         update: function () 
         {
+            game.physics.arcade.collide(player1, layer);
+            game.physics.arcade.collide(player2, layer);
             //player1
             player1.body.velocity.x = 0;
             player1.body.velocity.y = 0;
@@ -160,7 +171,7 @@ GameStates.makeGame3 = function( game, shared ) {
         {
             if(P2IsIt == true)
             {
-                player1.loadTexture('Tagger',0);
+                player1.loadTexture('tagger',0);
                 player2.loadTexture('WhitePlayer',0);
                 player1.x = 200;
                 player1.y = 300;
@@ -171,7 +182,7 @@ GameStates.makeGame3 = function( game, shared ) {
             else
             {
                 player1.loadTexture('BlackPlayer',0);
-                player2.loadTexture('Tagger',0);
+                player2.loadTexture('tagger',0);
                 player1.x = 200;
                 player1.y = 300;
                 player2.x = 600;
@@ -184,7 +195,7 @@ GameStates.makeGame3 = function( game, shared ) {
         {
             if(P2IsIt == true)
             {
-                player1.loadTexture('Tagger',0);
+                player1.loadTexture('tagger',0);
                 player2.loadTexture('WhitePlayer',0);
                 player1.x = 200;
                 player1.y = 300;
@@ -198,7 +209,7 @@ GameStates.makeGame3 = function( game, shared ) {
             else
             {
                 player1.loadTexture('BlackPlayer',0);
-                player2.loadTexture('Tagger',0);
+                player2.loadTexture('tagger',0);
                 player1.x = 200;
                 player1.y = 300;
                 player2.x = 600;
@@ -212,17 +223,17 @@ GameStates.makeGame3 = function( game, shared ) {
             {
                 var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
                 winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P1 Wins', style);
-                quitGame();
+                quitGame1();
             }
             else if(P2Score == 5)
             {
                 var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
                 winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P2 Wins', style);
-                quitGame();
+                quitGame2();
             }
             timer.stop();
             timer = game.time.create(false);
-            timer.loop(2000, this.backgroundChange,this);
+            timer.loop(3000, this.backgroundChange,this);
             timer.start();
             timer1.stop();
             timer1 = game.time.create(false);
@@ -233,5 +244,5 @@ GameStates.makeGame3 = function( game, shared ) {
         {
             game.debug.text('Changing Tagger At: ' + timer1.duration.toFixed(0), 32, 32);
         }
-    };
+    }
 };

@@ -19,6 +19,8 @@ window.onload = function() {
 	game.state.add( 'Game1', GameStates.makeGame1( game, shared ) );
 	game.state.add( 'Game2', GameStates.makeGame2( game, shared ) );
 	game.state.add( 'Game3', GameStates.makeGame3( game, shared ) );
+	game.state.add('P1Victory', GameStates.makeP1Victory(game, shared));
+	game.state.add('P2Victory', GameStates.makeP1Victory(game, shared));
 	//	Now start the Boot state.
 	game.state.start('Boot');
 

@@ -10,7 +10,6 @@ GameStates.makeGame1 = function( game, shared ) {
     var background = null;
     var map = null;
     var layer = null;
-    //var border = null;
     var backgroundWhite = true;
 
     var cursor = null;
@@ -25,7 +24,7 @@ GameStates.makeGame1 = function( game, shared ) {
     var map = null;
     var layer = null;
     //end game
-    function quitGame()
+    function quitGame1()
     {
         music.stop();
         player1.destroy();
@@ -35,7 +34,19 @@ GameStates.makeGame1 = function( game, shared ) {
         P1Score = 0;
         P2Score = 0;
         background.destroy();
-        //border.destroy();
+        game.state.start('P1Victory');
+    }
+    function quitGame2()
+    {
+        music.stop();
+        player1.destroy();
+        player2.destroy();
+        timer.stop();
+        timer1.stop();
+        P1Score = 0;
+        P2Score = 0;
+        background.destroy();
+        game.state.start('P2Victory');
     }
     return {
     
@@ -51,8 +62,9 @@ GameStates.makeGame1 = function( game, shared ) {
             map.addTilesetImage('tagger');
             layer = map.createLayer(0);
             layer.resizeWorld();
-            map.setCollisionBetween(0,0, true,0,);
-            layer.debug = true;
+            map.setCollisionBetween(0,0);
+            
+            //layer.debug = true;
 
             player1 = game.add.sprite(200,300,'BlackPlayer');
             player2 = game.add.sprite(600,300,'tagger');
@@ -74,7 +86,7 @@ GameStates.makeGame1 = function( game, shared ) {
             leftC = game.input.keyboard.addKey(Phaser.Keyboard.A);
             
             //create physics movement for both players
-            game.physics.enable( [player1,player2,map]);
+            game.physics.enable( [player1,player2]);
             player1.body.setSize(48,48,0,0);
             player2.body.setSize(48,48,0,0);
             player1.body.onCollide = new Phaser.Signal();
@@ -90,18 +102,20 @@ GameStates.makeGame1 = function( game, shared ) {
         {
             if(backgroundWhite == true)
             {
-                game.add.tween(background).to({alpha: 0},2000, Phaser.Easing.Linear.None, true);
+                game.add.tween(background).to({alpha: 0},3000, Phaser.Easing.Linear.None, true);
                 backgroundWhite = false;
             }
             else
             {
-                game.add.tween(background).to({alpha:1},2000,Phaser.Easing.Linear.None,true);
+                game.add.tween(background).to({alpha:1},3000,Phaser.Easing.Linear.None,true);
                 backgroundWhite = true;
             }
         },
     
         update: function () 
         {
+            game.physics.arcade.collide(player1, layer);
+            game.physics.arcade.collide(player2, layer);
             //player1
             player1.body.velocity.x = 0;
             player1.body.velocity.y = 0;
@@ -153,6 +167,7 @@ GameStates.makeGame1 = function( game, shared ) {
             }
             game.physics.arcade.collide(player1,player2);
         },
+
         changeSide: function()
         {
             if(P2IsIt == true)
@@ -209,17 +224,17 @@ GameStates.makeGame1 = function( game, shared ) {
             {
                 var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
                 winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P1 Wins', style);
-                quitGame();
+                quitGame1();
             }
             else if(P2Score == 5)
             {
                 var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
                 winnerText = game.add.text(game.world.centerX, game.world.centerY, 'P2 Wins', style);
-                quitGame();
+                quitGame2();
             }
             timer.stop();
             timer = game.time.create(false);
-            timer.loop(2000, this.backgroundChange,this);
+            timer.loop(3000, this.backgroundChange,this);
             timer.start();
             timer1.stop();
             timer1 = game.time.create(false);
@@ -228,6 +243,7 @@ GameStates.makeGame1 = function( game, shared ) {
         },
         render: function()
         {
+            //game.debug.text('Changing Background: ' + timer.duration.toFixed(0), 10, 10);
             game.debug.text('Changing Tagger At: ' + timer1.duration.toFixed(0), 32, 32);
         }
     }

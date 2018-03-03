@@ -32,8 +32,8 @@ GameStates.makePreloader = function( game ) {
             game.load.image('BlackBackground','assets/blakbackground.png');
             game.load.image('RedBorder','assets/redborder.png');
             game.load.tilemap('level1','assets/stealth1.csv',null,Phaser.Tilemap.CSV);
-            //game.load.tilemap('level2', 'assets/stealth2.json',null,Phaser.Tilemap.TILED_JSON);
-            //game.load.tilemap('level3', 'assets/stealth3.json',null,Phaser.Tilemap.TILED_JSON);
+            game.load.tilemap('level2','assets/stealth2.csv',null,Phaser.Tilemap.CSV);
+            game.load.tilemap('level3','assets/stealth3.csv',null,Phaser.Tilemap.CSV);
         },
     
         create: function () 
