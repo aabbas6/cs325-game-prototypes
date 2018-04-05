@@ -23,6 +23,8 @@ GameStates.makePreloader = function( game ) {
             game.load.spritesheet('Button', 'assets/playButton.png',200,100);
             game.load.spritesheet('craftButton','assets/craftButton.png',200,100);
             game.load.spritesheet('gatherButton', 'assets/gatherButton.png',200,100);
+            game.load.spritesheet('fightButton','assets/endButton.png',200,100);
+            game.load.image('boss','assets/Orc.png');
             game.load.image('ore','assets/ore.png');
             game.load.image('tree','assets/tree.png');
             game.load.image('armor','assets/armor.png');
@@ -32,6 +34,9 @@ GameStates.makePreloader = function( game ) {
             game.load.audio('Gathering', ['assets/64.mp3']);
             game.load.audio('Crafting',['assets/86.mp3']);
             game.load.audio('Adventure',['assets/29.mp3']);
+            game.load.audio('Boss',['assets/103.mp3']);
+            game.load.audio('GameOver',['assets/156.mp3']);
+            game.load.audio('Win',['assets/117.mp3']);
             
         },
     
@@ -54,7 +59,7 @@ GameStates.makePreloader = function( game ) {
             //	If you don't have any music in your game then put the game.state.start line into the create function and delete
             //	the update function completely.
             
-            if (game.cache.isSoundDecoded('Gathering') && game.cache.isSoundDecoded('Crafting') && game.cache.isSoundDecoded('Adventure') && ready == false)
+            if (game.cache.isSoundDecoded('Win') && game.cache.isSoundDecoded('Boss') &&game.cache.isSoundDecoded('Gathering') && game.cache.isSoundDecoded('Crafting') && game.cache.isSoundDecoded('Adventure') && ready == false)
             {
                 ready = true;
                 game.state.start('MainMenu');

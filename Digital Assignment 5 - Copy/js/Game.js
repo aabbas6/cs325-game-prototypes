@@ -4,6 +4,7 @@ GameStates.makeGame = function( game, shared ) {
     // Create your own variables.
     var craftButton;
     var gatherButton;
+    var fightButton;
     //Day
     var DayCount;
     //Gather Nodes
@@ -43,6 +44,12 @@ GameStates.makeGame = function( game, shared ) {
     var menumusic;
     var gatheringmusic;
     var craftingmusic;
+    var bossmusic;
+    var endStatus;
+    var endMusic;
+    //Boss
+    var Boss;
+    var HP;
     return {
     
         create: function () 
@@ -54,16 +61,22 @@ GameStates.makeGame = function( game, shared ) {
             menumusic = game.add.audio("Adventure");
             craftingmusic = game.add.audio("Crafting");
             gatheringmusic = game.add.audio("Gathering");
+            bossmusic = game.add.audio("Boss");
             menumusic.play();
+
             //initialize
             craftButton = game.add.button(100, 400, 'craftButton', this.craftStart, this, 2,0,1);
             gatherButton = game.add.button(310, 400, 'gatherButton', this.gatherStart, this, 2,0,1);
+            fightButton = game.add.button(520,400, 'fightButton',this.bossFight,this,2,0,1);
+            fightButton.visible = false;
+            Boss = game.add.button(300, 150, 'boss',this.damage,this);
+            Boss.visible = false;
             Ore = game.add.button(game.world.centerX - 200, game.world.centerY-100, 'ore', this.metalAdd,this);
             Tree = game.add.button(game.world.centerX + 100, game.world.centerY-100,'tree', this.woodAdd,this);
             Axe = game.add.button(150,200, 'axe',this.levelAxe,this);
             pickAxe = game.add.button(150,400,'pickaxe',this.levelPickAxe,this);
             Armor = game.add.button(450,200, 'armor',this.levelArmor,this);
-            Weapon = game.add.button(450,400, 'weapon',this.Weapon,this);
+            Weapon = game.add.button(450,400, 'weapon',this.levelWeapon,this);
 
             //set Icons
             pickaxeIcon = game.add.sprite(150,100,'pickaxe');
@@ -177,6 +190,7 @@ GameStates.makeGame = function( game, shared ) {
                 woodCountM.setText(" Wood: "+ woodCount);
                 pickAxeLv++;
                 PickAxeLvM.setText(": " + pickAxeLv);
+                pickAxeCost.setText("Metal Cost:  "+ (pickAxeLv * 2) + "\nWood Cost: " + (pickAxeLv * 3));
             }
         },
         levelAxe: function()
@@ -184,33 +198,91 @@ GameStates.makeGame = function( game, shared ) {
             if((metalCount>= (AxeLv * 1)) && (woodCount>= (AxeLv * 4)))
             {
                 metalCount = metalCount - (AxeLv * 1);
+                metalCountM.setText("Metal: "+ metalCount);
                 woodCount = woodCount - (AxeLv * 4);
+                woodCountM.setText("Wood Count: " + woodCount);
                 AxeLv++;
+                AxeLvM.setText(": " + AxeLv);
+                axeCost.setText("Metal Cost: " + (AxeLv * 1) + "\nWood Cost: " + (AxeLv * 4));
             }
+
         },
         levelWeapon: function()
         {
             if( (metalCount>= (WeaponLv * 4)) && (woodCount>= (WeaponLv * 1)))
             {
                 metalCount = metalCount - (WeaponLv * 4);
+                metalCountM.setText("Metal: "+ metalCount);
                 woodCount = woodCount - (WeaponLv * 1);
-                weaponLv++;
+                woodCountM.setText("Wood Count: " + woodCount);
+                WeaponLv++;
+                WeaponLvM.setText(": " + WeaponLv);
+                weaponCost.setText("Metal Cost: " + (WeaponLv * 4) + "\nWoodCost: " + (WeaponLv * 1));
             }
         },
         levelArmor: function()
         {
-            if(metalCount>=(armorLv *5))
+            if(metalCount>=(ArmorLv *5))
             { 
-                   metalCount = metalCount - (armorLv * 5);
-                   armorLv++;
+                   metalCount = metalCount - (ArmorLv * 5);
+                   metalCountM.setText("Metal: "+ metalCount);
+                   ArmorLv++;
+                   ArmorLvM.setText(": " + ArmorLv);
+                   armorCost.setText("Metal Cost: " + (ArmorLv*5));
             }
         },
         switchMenu: function()
         {
-            craftButton.visible =! craftButton.visible;
-            gatherButton.visible =! gatherButton.visible;
-            craftButton.inputEnabled =! craftButton.inputEnabled;
-            gatherButton.inputEnabled =! gatherButton.inputEnabled;
+            if(DayCount<10)
+            {
+                craftButton.visible =! craftButton.visible;
+                gatherButton.visible =! gatherButton.visible;
+            }
+            else
+            {
+                fightButton.visible = true;
+            }
+        },
+        bossFight: function()
+        {
+            fightButton.visible = false;
+            menumusic.stop();
+            bossmusic.play();
+            Boss.visible = true;
+            HP = 20;
+        },
+        damage: function()
+        {
+            HP -= WeaponLv;
+            if(HP>0)
+            {   
+                ArmorLv--;
+                ArmorLvM.setText(": " + ArmorLv);
+                if(ArmorLv == 0)
+                {
+                    Boss.visible = false;
+                    endStatus = game.add.text(300,300, "You have died!");
+                    endMusic = game.add.audio("GameOver");
+                    bossmusic.stop();
+                    endMusic.play();
+                    game.time.events.add(Phaser.Timer.SECOND * 10, endMusic.stop(), this);
+                    this.turnoff();
+                }
+            }
+            else
+            {
+                Boss.visible = false;
+                bossmusic.stop();
+                endMusic = game.add.audio("Win");
+                endMusic.play();
+                endStatus = game.add.text(100,200, "You have saved the world! Tired from all the work\nyou have done for the past 10 days,\nyou decided to retire a simple life!");
+                game.time.events.add(Phaser.Timer.SECOND * 10, endMusic.stop(), this); 
+                this.turnoff();
+            }
+        },
+        turnoff: function()
+        {
+            game.state.start("MainMenu");
         },
         update:function()
         {
