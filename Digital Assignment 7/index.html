@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser Basic Project Template</title>
+	<script src="js/phaser.min.js"></script>
+	<!-- Boot.js must come first since it creates the BasicGame object
+	that stores all the states. -->
+	<script src="js/Boot.js"></script>
+	<script src="js/Preloader.js"></script>
+	<script src="js/MainMenu.js"></script>
+
+	<script src="js/Game1.js"></script>
+
+	<!-- main.js must come last since it references the other ones. -->
+	<script src="js/main.js"></script>
+
+<style>
+body
+{
+    color: #777;
+    font-family: "Avenir", Verdana, sans-serif;
+}
+#readme
+{
+    margin-top: 10px;
+}
+</style>
+
+</head>
+<body>
+<div id="game"></div>
+<div id="readme">
+<h2>Camouflage and Don't Get Caught</h2>
+
+<ul>
+<li><strong>Originality:</strong>
+What is original about your game?
+Interaction with the background and players.
+</li>
+
+<li><strong>Technical Merit:</strong>
+What is interesting about your game technology?
+Interaction with the background and players.
+</li>
+
+<li><strong>Prototype Postmortem:</strong>
+What did you learn from this iteration?
+I finally added more levels, able to play with tilemaps and its collision.
+What was the easiest or hardest part of making it?
+Figuring out how to work tilemaps; I had to switch to CSV
+</li>
+
+<li><strong>Prototype Assets:</strong>
+Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
+<ul>
+<li>Loading screen: self-made</li>
+<li>Button Image: Mine</li>
+<li>Music: (<a href=" https://www.youtube.com/watch?v=A7XlLZelPVg"> Stealth Music - Espionage</a>)
+</ul>
+</li>
+
+<li><strong>Prototype Closest Other Game:</strong>
+Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<ul>
+<li>The state code example is similar to the gamestate-template</a></li>
+</ul>
+</li>
+
+<li><strong>High Concept:</strong>
+A one-sentence summary of your game.
+<ul> <li> A game of tag between two players using tactical stealth and time. </ul> </li>
+</li>
+
+<li><strong>Theme:</strong>
+State which of the Storymatic themes you used.
+<ul><li> caught! </li></ul>
+</li>
+
+<li><strong>Mandated Variety:</strong>
+State which input, randomness, genre, and play style you used in this prototype.
+<ul><li> Play Style: Competitive</li></ul>
+<ul><li> Deterministic </li></ul>
+<ul><li> Input: Keyboard </li></ul>
+</li>
+
+<li><strong>Prototype Goal:</strong>
+What game mechanic is this prototype evaluating?
+<ul><li> OnCollision + Timer is heavily relied on </li></ul>
+</li>
+
+<li><strong>Player Experience Goals:</strong>
+What experience do you want players to have when playing your game?
+<ul><li> Competitive and tricking the other player </li></ul>
+</li>
+
+<li><strong>Gameplay:</strong>
+A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<ul><li> The game starts of with a tagger, usually P2, and the tagger must tag the other player as the background camouflages the player.</li>
+<li> If the tagger does not tag the other player within 10 seconds, the game resets and switches sides. First person to catch the other person 5 times wins.</li></ul>
+</li>
+
+<li><strong>Strategies:</strong>
+What player strategies do you expect will be effective at playing this game?
+<ul><li> Constant juking and psychological gameplay with the other person as the screen camouflages their character </li></ul>
+</li>
+
+<li><strong>Story/Setting/Premise:</strong>
+A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
+How will the dramatic tension interact with the gameplay tension?
+</li>
+
+<li><strong>Target Audience:</strong>
+A single sentence that describes the demographic you're trying to reach.
+</li>
+
+<li><strong>Play Time:</strong>
+How long does your game take to play? 
+<ul><li> Atleast 5 minutes </ul></li>
+</li>
+
+</ul>
+</div>
+</body>
+</html>
