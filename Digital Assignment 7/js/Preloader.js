@@ -28,10 +28,19 @@ GameStates.makePreloader = function( game ) {
             game.load.image('Player','assets/player.png');
             game.load.image('tagger','assets/tagger.png');
             game.load.image('Background1','assets/background.png');
-            game.load.image('RedBorder','assets/redborder.png');
-            game.load.tilemap('level1','assets/level1trap.csv',null,Phaser.Tilemap.CSV);
+            game.load.image('greenArrow','assets/greenArrow.png');
+            game.load.image('greenPitfall','assets/greenPitfall.png');
+            game.load.image('greenButton','assets/greenButton.png');
+            game.load.image('greenBoulder','assets/greenBoulder.png');
+            game.load.image('blueArrow','assets/blueArrow.png');
+            game.load.image('bluePitfall','assets/bluePitfall.png');
+            game.load.image('blueButton','assets/blueButton.png');
+            game.load.image('blueBoulder','assets/blueBoulder.png');
+            
+            game.load.tilemap('level1','assets/level1.csv',null,Phaser.Tilemap.CSV);
             game.load.tilemap('level2','assets/level2trap.csv',null,Phaser.Tilemap.CSV);
             game.load.tilemap('level3','assets/level3trap.csv',null,Phaser.Tilemap.CSV);
+        
         },
     
         create: function () 

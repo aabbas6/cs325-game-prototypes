@@ -27,10 +27,10 @@ GameStates.makeMainMenu = function( game, shared ) {
             var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
             var instructions = game.add.text(200, 100, 'P1 Controls: W,A,S,D', style);
             var instructions2 = game.add.text(200,200,'P2: Controls: Directional Keys', style);
-            var instructions3 = game.add.text(200,300,'Get to the end of the map',style);
+            var instructions3 = game.add.text(200,300,'Dodge the incoming circles',style);
 
             //playButton = game.add.button(game.world.centerX-100,400, 'Button', startGame,2,1,0);   
-            stage1but = game.add.button(100,400, 'Stage1', startGame1, 2,1,0);
+            stage1but = game.add.button(game.world.centerX-100,400, 'Button', startGame1, 2,1,0);
 
         }
     };
